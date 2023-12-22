@@ -1,0 +1,3 @@
+go env -w GOPROXY=https://goproxy.cn,direct  //换源
+go mod download  //根据go.mod安装依赖
+go get -u <package>  //添加依赖
