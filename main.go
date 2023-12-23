@@ -9,26 +9,7 @@ import (
 	"Fokkely-core/core"
 )
 
-func processData(c *gin.Context) {
-	// 声明一个结构体来映射JSON数据
-	var data map[string]string
-	fmt.Println(data)
-	// 解析请求的JSON数据到data结构体
-	if err := c.BindJSON(&data); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	// 从data中获取"each"字段的值
-	eachValue, ok := data["each"]
-	if !ok {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Missing 'each' field in JSON data"})
-		return
-	}
-
-	// 输出数据到响应
-	c.JSON(http.StatusOK, gin.H{"message": "Received POST request", "eachValue": eachValue})
-}
+var k map[string]core.Skill
 
 func handleHello(c *gin.Context) {
 
@@ -39,19 +20,30 @@ func handleHello(c *gin.Context) {
 
 // get-skill
 func handleGetSkill(c *gin.Context) {
+	var jsonParams map[string]string
 
-	c.JSON(http.StatusOK, gin.H{
-		"each": "hello",
-	})
+	err := c.BindJSON(&jsonParams)
+	fmt.Println(jsonParams)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	id, ok := jsonParams["id"]
+	if !ok {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "错误的字段"})
+		return
+	}
+	sk := k[id]
+	c.JSON(http.StatusOK, sk)
 }
 func main() {
 
 	app := gin.Default()
-	k, _ := core.GetSkillData()
-	fmt.Println("k:", k["sk-1"])
+	k, _ = core.GetSkillData()
+	//fmt.Println("k:", k)
 
 	app.POST("/hello", handleHello)
-	app.POST("/process", processData)
 	app.POST("/get-skill", handleGetSkill)
 
 	// 启动服务器，默认在 :8080 上监听
