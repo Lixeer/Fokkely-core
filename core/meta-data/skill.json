@@ -1,1 +1,4 @@
-{"sk-1":{"id":"sk-1","name": "demo"}}
+{
+"sk-1":{"id":"sk-1","name": "demo1"},
+"sk-2":{"id":"sk-2","name": "demo2"}
+}

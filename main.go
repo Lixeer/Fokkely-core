@@ -47,8 +47,8 @@ func handleGetSkill(c *gin.Context) {
 func main() {
 
 	app := gin.Default()
-	k, _ := core.GetSkillData("sk-1")
-	fmt.Println("k:", k)
+	k, _ := core.GetSkillData()
+	fmt.Println("k:", k["sk-1"])
 
 	app.POST("/hello", handleHello)
 	app.POST("/process", processData)

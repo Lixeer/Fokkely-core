@@ -2,9 +2,7 @@ package core
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
-	"os"
 )
 
 type Skill struct {
@@ -12,28 +10,19 @@ type Skill struct {
 	Name string `json:"name"`
 }
 
-func GetSkillData(skillID string) (*Skill, error) {
-	file, err := os.Open("meta-skill/skill.json")
-	if err != nil {
-		return nil, fmt.Errorf("无法打开文件: %v", err)
-	}
-	defer file.Close()
-
+func GetSkillData() (map[string]Skill, error) {
 	// 读取文件内容
-	data, err := ioutil.ReadAll(file)
+	fileContent, err := ioutil.ReadFile("meta-data/skill.json")
 	if err != nil {
-		return nil, fmt.Errorf("无法读取文件内容: %v", err)
+		return nil, err
 	}
 
-	// 创建一个Person结构体实例
-	var skill Skill
-
-	// 解析JSON数据到结构体
-	err = json.Unmarshal(data, &skill)
+	// 解析 JSON 数据
+	var skills map[string]Skill
+	err = json.Unmarshal(fileContent, &skills)
 	if err != nil {
-		return nil, fmt.Errorf("解析JSON时发生错误: %v", err)
+		return nil, err
 	}
 
-	return &skill, nil
-
+	return skills, nil
 }
