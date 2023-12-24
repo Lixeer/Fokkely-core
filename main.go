@@ -9,7 +9,8 @@ import (
 	"Fokkely-core/core"
 )
 
-var k map[string]core.Skill
+var k map[string]core.Skill //准备换为DataMap
+var skillDict core.SkillMap
 
 func handleHello(c *gin.Context) {
 
@@ -34,14 +35,22 @@ func handleGetSkill(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "错误的字段"})
 		return
 	}
-	sk := k[id]
+	sk, _ := skillDict.Get(id)
 	c.JSON(http.StatusOK, sk)
 }
 func main() {
 
 	app := gin.Default()
-	k, _ = core.GetSkillData()
-	//fmt.Println("k:", k)
+	skillDict.Load()
+
+	/*
+
+		test pass
+		var t core.SkillMap
+		t.Load()
+		fmt.Println(t.Get("sk-1"))
+
+	*/
 
 	app.POST("/hello", handleHello)
 	app.POST("/get-skill", handleGetSkill)
