@@ -7,14 +7,13 @@ import (
 )
 
 type Skill struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+	Item map[string]interface{}
 	// List []string
 }
 
 type SkillMap struct {
 	DataMap
-	Item map[string]Skill
+	Item map[string]map[string]interface{}
 }
 
 func (skm *SkillMap) Load() error {
@@ -39,28 +38,8 @@ func (skm *SkillMap) Load() error {
 
 }
 
-func (skm *SkillMap) Get(k string) (Skill, error) {
+func (skm *SkillMap) Get(k string) (map[string]interface{}, error) {
 
 	return skm.Item[k], nil
 
-}
-
-func GetSkillData() (map[string]Skill, error) {
-	// 读取文件内容
-	fileContent, err := ioutil.ReadFile("core/meta-data/skill.json")
-
-	//fmt.Print(ct)
-	if err != nil {
-		return nil, err
-	}
-
-	// 解析 JSON 数据
-	var skills map[string]Skill
-	//fmt.Println("skills ", skills)
-	err = json.Unmarshal(fileContent, &skills)
-	if err != nil {
-		return nil, err
-	}
-
-	return skills, nil
 }

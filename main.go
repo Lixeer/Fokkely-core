@@ -9,7 +9,7 @@ import (
 	"Fokkely-core/core"
 )
 
-var k map[string]core.Skill //准备换为DataMap
+var k map[string]map[string]interface{} //准备换为DataMap
 var skillDict core.SkillMap
 
 func handleHello(c *gin.Context) {
