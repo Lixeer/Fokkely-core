@@ -6,6 +6,11 @@ import (
 	"io/ioutil"
 )
 
+type Skill struct {
+	Item map[string]interface{}
+	// List []string
+}
+
 type SkillMap struct {
 	DataMap
 	Item map[string]map[string]interface{}

@@ -3,26 +3,23 @@
         "name": "skill demo",
         "description": "balabala",
         "story": "a background story about the skill",
-        "?ball": "Three or four for skill using<bule,red,green,purple,white>",
+        "ball": "Three or four for skill using<bule,red,green,purple,white>",
         "ball": ["red","red","blue"],
 
         "recovery": {
-          "?target": "skill target <all,self,abs-max,per-max,abs-min,per-min,front,back,middle>",
+          "target": "skill target <all,self,abs-max,per-max,abs-min,per-min,front,back,middle>",
           "target": "self",
           "base-num": [100,200,300,400,500],
           "per-num": [0.1,0.2,0.3,0.4,0.5]
 
         },
         "attack":{
-          "?target": "It is similar to recovery target,but have not self and act on enemy",
+          "target": "It is similar to recovery target,but have not self and act on enemy",
           "target": "all",
           "base-num": [100,200,300,400,500],
           "per-num": [0.01,0.02,0.03,0.04,0.05],
-          "?type": "<TD,AD,AP>",
+          "type": "<TD,AD,AP>",
           "type": "TD"
-
-
-
         }
 
 

@@ -53,7 +53,7 @@ func main() {
 	*/
 
 	app.POST("/hello", handleHello)
-	app.POST("/get-skill", handleGetSkill)
+	app.POST("/get/skill", handleGetSkill)
 
 	// 启动服务器，默认在 :8080 上监听
 	app.Run(":5700")
